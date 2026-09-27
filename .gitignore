@@ -1,0 +1,9 @@
+.venv
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+.env
+
+# corpus.json 이 본문을 그대로 담고 있어 docs/*.md 는 사본이다.
+# 둘 다 넣으면 3.6MB 가 중복된다. fetch_corpus.py 가 언제든 다시 만든다.
+data/docs/
