@@ -73,8 +73,13 @@ class S(TypedDict, total=False):
     calls: Annotated[int, operator.add]
     plan_fix: int
     # 아래 다섯은 Send 가 조사관 한 명에게만 들려 보내는 짐이다.
-    # 상태 스키마에 없으면 LangGraph 가 조용히 버린다 — 한 번 당했다.
     # 조사관은 이 값들을 돌려주지 않으므로 리듀서가 필요 없다.
+    #
+    # 2026-09-28 정정 — 처음엔 "스키마에 없으면 LangGraph 가 조용히 버린다"고 적었는데
+    # **틀렸다.** langgraph 1.2.11 은 스키마에 없어도 Send 페이로드를 그대로 전달한다
+    # (이 다섯 줄을 지우고 돌려도 파이프라인은 멀쩡히 돈다). 그때 KeyError 를 낸 것은
+    # 아래 `다시()` 가 Send 가 아니라 노드 이름을 돌려준 쪽 하나뿐이었다.
+    # 이 줄들은 이제 "무엇이 실려 오는가"를 적어 두는 문서 역할만 한다.
     idx: int
     절: dict
     남의구역: list
